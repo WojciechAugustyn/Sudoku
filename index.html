@@ -1,0 +1,94 @@
+<!-- Created by Wojtek@ -->
+
+<!--
+CHANGELOG:
+16.02.2019:
+	Progress bar, that indicates how much the generating process of a Sudoku has advanced
+	Better localStorage error handling
+-->
+
+<!doctype html>
+<html manifest="./cache_manifest.manifest" lang="en">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<title>Sudoku game</title>
+		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" type="text/css" href="Fontello/css/fontello.css"/>
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous"/>
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,600" rel="stylesheet"/>
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <link rel="shortcut icon" type="image/x-icon" href="sudoku_icon.png">
+        <link rel="apple-touch-icon" href="sudoku_icon.png">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="javascript.js"></script>
+	</head>
+
+	<body>
+		<div id="startMenu">
+			<div class="content">
+				<h1>SUDOKU</h1>
+				<button onclick="$('#difficultySelector').fadeIn(200);">New Game</button><br/>
+				<button id="resumeGameButton" onclick="data.load();$('#startMenu').fadeOut(200);">Continue</button><br/>
+				<!--<button onclick="window.location.href='Solver/index.html'">Solve</button>-->
+			</div>
+
+			<div id="difficultySelector" class="content">
+				<h2>DIFFICULTY</h2>
+				<button onclick="sudokuCreator.createSudoku(40);">Easy</button><br/>
+				<button onclick="sudokuCreator.createSudoku(70);">Medium</button><br/>
+				<button onclick="sudokuCreator.createSudoku(100);">Hard</button><br/>
+			</div>
+            <div id="footer">
+		         <footer>Created by Wojtek@</footer>
+		    </div>
+		</div>
+
+
+
+
+		<header>
+			<button onclick="popup.openWithId('#hamburgerMenu');" class="fas fa-bars generateButton"></button>
+			<h1>Sudoku</h1>
+			<button id="checkButton" onclick="checkSudoku();" class="fas fa-check"></button>
+		</header>
+	<div id="placeholder"></div>
+
+		
+		<table id="sudokuTable"></table>
+
+
+		<div id="fillButtonContainer">
+			<button>1</button>
+			<button>2</button>
+			<button>3</button>
+			<button>4</button>
+			<button>5</button>
+			<button>6</button>
+			<button>7</button>
+			<button>8</button>
+			<button>9</button>
+			<button>X</button>
+		</div>
+
+		<div class="overlay" onclick="popup.close()"></div>
+
+		<div id="progressPopup" class="popup">
+			<h2>Generating</h2>
+			<div id="progressBar">
+			<span>0%</span>
+			</div>
+		</div>
+		
+		<div id="hamburgerMenu" class="popup">
+		<h2>Menu</h2>
+			<p onclick="$('.changable > .numberContainer').text(''); popup.close()">Clear</p>
+			<p onclick="solveSudoku(); popup.close()">Solve</p>
+        <h2>Restart</h2>
+            <p id="restart" onclick="sudokuCreator.createSudoku(40); popup.close()">Easy</p>
+            <p id="restart" onclick="sudokuCreator.createSudoku(70); popup.close()">Medium</p>
+            <p id="restart" onclick="sudokuCreator.createSudoku(100); popup.close()">Hard</p>
+        </div>
+	</body>
+</html>
